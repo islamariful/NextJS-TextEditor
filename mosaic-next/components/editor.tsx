@@ -1,8 +1,8 @@
 // components/editor.tsx
 'use client';
 
-import { FC, useEffect, useState } from 'react';
-import { EditorContent, useEditor } from '@tiptap/react';
+import { FC, useEffect } from 'react';
+import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Bold from '@tiptap/extension-bold';
 import Italic from '@tiptap/extension-italic';
@@ -34,6 +34,12 @@ const EditorComponent: FC<EditorProps> = ({ initialContent, onChange }) => {
       Blockquote,
       Code,
     ],
+    editorProps: {
+      attributes: {
+        class:
+          'flex flex-col px-4 py-3 justify-start border-b border-r border-l border-gray-700 items-start w-full gap-3 font-medium text-[16px] pt-4 rounded-bl-md rounded-br-md min-h-[500px]',
+      },
+    },
     content: initialContent,
     onUpdate: ({ editor }) => {
       const newContent = editor.getHTML();
@@ -45,12 +51,12 @@ const EditorComponent: FC<EditorProps> = ({ initialContent, onChange }) => {
     if (editor && initialContent !== editor.getHTML()) {
       editor.commands.setContent(initialContent);
     }
-  }, [initialContent]);
+  }, [initialContent, editor]);
 
   return (
-    <div className="flex flex-col">
+    <div className="w-full px-4">
       <Toolbar editor={editor} />
-      <EditorContent editor={editor} className="p-4 bg-gray-800 text-gray-100" />
+      <EditorContent style={{ whiteSpace: 'pre-line' }} editor={editor} />
     </div>
   );
 };
