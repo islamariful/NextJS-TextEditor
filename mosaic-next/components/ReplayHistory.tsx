@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Slider } from '@mui/material';
-import { Play, Pause, X } from 'lucide-react';
+import { Play, Pause, X, SkipBack, SkipForward } from 'lucide-react';
 
 interface ReplayHistoryProps {
   history: { content: string; timestamp: Date }[];
@@ -41,12 +41,31 @@ const ReplayHistory: React.FC<ReplayHistoryProps> = ({ history, onSliderChange, 
     onSliderChange(newValue as number);
   };
 
+  const skipToStart = () => {
+    setValue(0);
+    onSliderChange(0);
+  };
+
+  const skipToEnd = () => {
+    const lastIndex = history.length - 1;
+    setValue(lastIndex);
+    onSliderChange(lastIndex);
+  };
+
   return (
     <div className="flex flex-col w-full h-full bg-gray-800 p-4">
       <div className="flex justify-between items-center mb-2">
-        <button onClick={onPausePlay} className="text-blue-500">
-          {isPlaying ? <Pause size={24} /> : <Play size={24} />}
-        </button>
+        <div className="flex space-x-12">
+          <button onClick={skipToStart} className="text-blue-500">
+            <SkipBack size={24} />
+          </button>
+          <button onClick={onPausePlay} className="text-blue-500">
+            {isPlaying ? <Pause size={24} /> : <Play size={24} />}
+          </button>
+          <button onClick={skipToEnd} className="text-blue-500">
+            <SkipForward size={24} />
+          </button>
+        </div>
         <button onClick={onDismiss} className="text-red-500">
           <X size={24} />
         </button>

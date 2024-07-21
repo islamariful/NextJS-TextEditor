@@ -65,7 +65,7 @@ const Toolbar = ({ editor, onSave }: Props) => {
         >
           <Strikethrough className="w-5 h-5" />
         </button>
-        <button
+        {/* <button
           onClick={(e) => {
             e.preventDefault();
             editor.chain().focus().toggleHeading({ level: 2 }).run();
@@ -100,7 +100,7 @@ const Toolbar = ({ editor, onSave }: Props) => {
           className={editor.isActive('blockquote') ? 'bg-sky-700 text-white p-2 rounded-lg' : 'text-sky-400'}
         >
           <Quote className="w-5 h-5" />
-        </button>
+        </button> */}
         <button
           onClick={(e) => {
             e.preventDefault();
