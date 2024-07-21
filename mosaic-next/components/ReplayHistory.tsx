@@ -44,11 +44,11 @@ const ReplayHistory: React.FC<ReplayHistoryProps> = ({ history, onSliderChange, 
   return (
     <div className="flex flex-col w-full h-full bg-gray-800 p-4">
       <div className="flex justify-between items-center mb-2">
-        <button onClick={onDismiss} className="text-red-500">
-          <X size={24} />
-        </button>
         <button onClick={onPausePlay} className="text-blue-500">
           {isPlaying ? <Pause size={24} /> : <Play size={24} />}
+        </button>
+        <button onClick={onDismiss} className="text-red-500">
+          <X size={24} />
         </button>
       </div>
       <Slider
